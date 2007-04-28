@@ -79,7 +79,7 @@ all-am: update-revision $(TARGET) byte-code native-code
 
 # default clean
 clean-am:
-	rm -fR $(CMA) $(CMXA) $(CMO) $(CMI) $(CLEAN_CMI) $(CMX) $(OBJ) $(LIB) META $(CLEAN_EXTRA)
+	rm -fR $(CMA) $(CMXA) $(CMO) $(CMI) $(CLEAN_CMI) $(CMX) $(OBJ) $(LIB) META $(BYTE) $(NATIVE) $(CLEAN_EXTRA)
 
 @OCAMLFIND_TRUE@install-data-am: $(TARGET)
 @OCAMLFIND_TRUE@	if test "$(SITELIBDIR)" != ""; then \
