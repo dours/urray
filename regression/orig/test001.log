@@ -1,0 +1,22 @@
+init test #0: true
+init test #1: true
+init test #2: true
+sub test: true
+to_list test #0: true
+to_list test #1: true
+fold_right&to_list test: true
+fold_left&to_list  test: false
+of_listt&to_list #0: true
+of_listt&to_list #1: true
+of_listt&to_list #2: true
+copy test: true
+fill test: true
+append test #0: true
+append test #1: true
+append test #2: true
+blit test #0: true
+blit test #1: true
+blit test #2: true
+make_matrix test #0: true
+make_matrix test #1: true
+stable_sort test: true
