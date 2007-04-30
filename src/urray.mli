@@ -24,19 +24,22 @@
 (** Main type *)
 type 'a t
 
-(** Gets array length *)
+(** Gets urray length *)
 val length : 'a t -> int
 
-(** Gets array element *)
+(** Gets urray element *)
 val get : 'a t -> int -> 'a
 
-(** Sets array element *)
+(** Sets urray element *)
 val set : 'a t -> int -> 'a -> unit
 
-(** [Urray.make n x] returns a fresh array of length [n], initialized with [x]. All the 
-    elements of this new array are initially physically equal to [x] (in the sense of the 
+(** Empty urray *)
+val empty : unit -> 'a t
+
+(** [Urray.make n x] returns a fresh urray of length [n], initialized with [x]. All the 
+    elements of this new urray are initially physically equal to [x] (in the sense of the 
     [==] predicate). Consequently, if [x] is mutable, it is shared among all elements of 
-    the array, and modifying [x] through one of the array entries will modify all other 
+    the urray, and modifying [x] through one of the urray entries will modify all other 
     entries at the same time.
 
     Raise [Invalid_argument "Urray.init"] if [n] < 0  
@@ -50,15 +53,15 @@ val make : int -> 'a -> 'a t
  *)
 val make_matrix : int -> int -> 'a -> 'a t t
 
-(** [Urray.init n f] returns a fresh array of length [n], with element number [i] initialized 
-    to the result of [f i]. In other terms, [Array.init n f] tabulates the results of [f] 
+(** [Urray.init n f] returns a fresh urray of length [n], with element number [i] initialized 
+    to the result of [f i]. In other terms, [Urray.init n f] tabulates the results of [f] 
     applied to the integers [0] to [n-1]. 
 
     Raise [Invalid_argument "Urray.init"] if [n] < 0  
  *)
 val init : int -> (int -> 'a) -> 'a t
 
-(** [iter f a] applies function [f] to each element of array [a] *)
+(** [iter f a] applies function [f] to each element of urray [a] *)
 val iter : ('a -> unit) -> 'a t -> unit
 
 (** Same as [!Urray.iter] but the function is applied to the index of the element as first 
@@ -83,31 +86,31 @@ val of_list : 'a list -> 'a t
 val to_list : 'a t -> 'a list
 
 (** [Urray.fold_left f x a] computes [f (... (f (f x a.(0)) a.(1)) ...) a.(n-1)], 
-    where [n] is the length of the array [a]. 
+    where [n] is the length of the urray [a]. 
  *)
 val fold_left : ('a -> 'b -> 'a) -> 'a -> 'b t -> 'a
 
 (** [Urray.fold_right f a x] computes [f a.(0) (f a.(1) ( ... (f a.(n-1) x) ...))], 
-    where [n] is the length of the array [a].
+    where [n] is the length of the urray [a].
  *)
 val fold_right : ('b -> 'a -> 'a) -> 'b t -> 'a -> 'a
 
-(** Returns a copy of array *)
+(** Returns a copy of urray *)
 val copy : 'a t -> 'a t
 
-(** Appends two arrays *)
+(** Appends two urrays *)
 val append : 'a t -> 'a t -> 'a t
 
-(** [Urray.fill a ofs len x] modifies the array [a] in place, storing [x] in 
+(** [Urray.fill a ofs len x] modifies the urray [a] in place, storing [x] in 
     elements number [ofs] to [ofs + len - 1].
  
     Raise [Invalid_argument "Urray.fill"] if [ofs] and [len] do not designate 
-    a valid subarray of [a]
+    a valid suburray of [a]
  *)
 val fill : 'a t -> int -> int -> 'a -> unit
 
-(** [sub a start len] returns a fresh array of length [len],
-    containing the elements of array [a] numbered from [start] to [start + len - 1]
+(** [sub a start len] returns a fresh urray of length [len],
+    containing the elements of urray [a] numbered from [start] to [start + len - 1]
  *)
 val sub : 'a t -> int -> int -> 'a t 
 
@@ -115,20 +118,20 @@ val sub : 'a t -> int -> int -> 'a t
     element number [o1], to urray [v2], starting at element number [o2]. It works correctly 
     even if [v1] and [v2] are the same [urray], and the source and destination chunks overlap.
 
-    Raise [Invalid_argument "Urray.blit"] if [o1] and [len] do not designate a valid subarray 
-    of [v1], or if [o2] and [len] do not designate a valid subarray of [v2]
+    Raise [Invalid_argument "Urray.blit"] if [o1] and [len] do not designate a valid suburray 
+    of [v1], or if [o2] and [len] do not designate a valid suburray of [v2]
  *)
 val blit : 'a t -> int -> 'a t -> int -> int -> unit
 
 (** [concat l] concatenates the list of urrays [l] into one urray *)
 val concat : 'a t list -> 'a t
 
-(** Sort an array in increasing order according to a comparison function. 
+(** Sort an urray in increasing order according to a comparison function. 
     See [!Array.sort] for details
  *)
 val sort : ('a -> 'a -> int) -> 'a t -> unit
 
-(** Sort an array in increasing order according to a comparison function, preserving
+(** Sort an urray in increasing order according to a comparison function, preserving
     original order of equal elements. See [!Array.stable_sort] for details
  *)
 val stable_sort : ('a -> 'a -> int) -> 'a t -> unit

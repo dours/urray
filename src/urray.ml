@@ -32,6 +32,8 @@ let get a i = if i < bs then a.(0).(i) else a.(i lsr shift).(i land (bs-1))
 let set a i x =
   if i < bs then a.(0).(i) <- x else a.(i lsr shift).(i land (bs-1)) <- x
 
+let empty () = [||] 
+
 let make size x =
   if size < 0 
   then raise (Invalid_argument "Urray.make")
