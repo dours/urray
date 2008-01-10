@@ -1,6 +1,6 @@
-TESTS = test001 # test002 test003 test004
+TESTS = test001 
 
-TESTS_ENVIRONMENT = $(srcdir)/test.sh
+TESTS_ENVIRONMENT = EXEEXT=$(EXEEXT) $(srcdir)/test.sh
 
 include $(top_srcdir)/m4/Makefile.am.vars
 
@@ -10,7 +10,12 @@ MODULE_INCLUDES += -I $(top_srcdir)/src
 EXTRA_CMXA += $(PACKAGE).cmxa
 
 # OCaml parser call with flags
-AM_P4FLAGS := -pp "$(CAMLP4O) $(PARSER_INCLUDES) pa_log.cmo $(LOG)"
+AM_P5FLAGS := -pp "$(CAMLP5O) $(PARSER_INCLUDES) pa_log.cmo $(LOG)"
+
+# overwrite some variables
+PXFLAGS = $(P5FLAGS)
+CAMLPXLIB = $(CAMLP5LIB)
+MODULE_INCLUDES += -I $(CAMLP5LIB)
 
 TARGET = 
 
@@ -22,6 +27,6 @@ include $(top_srcdir)/m4/Makefile.am.targets
 
 # Rules to build tests
 %: %.ml
-	$(OCAMLOPT) $(BFLAGS) $(EXTRA_CMXA) $(P4FLAGS) -o $@$(EXEEXT) $<
+	$(OCAMLOPT) $(BFLAGS) $(EXTRA_CMXA) $(PXFLAGS) -o $@$(EXEEXT) $<
 
 include $(top_srcdir)/m4/Makefile.am.rules
