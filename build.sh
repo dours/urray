@@ -1,0 +1,1 @@
+/home/bga/svn/settings/build.sh
