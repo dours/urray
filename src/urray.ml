@@ -50,6 +50,8 @@ let init size f =
     let i, j = if j > 0 then i+1, j else i, bs in
     Array.init i (fun l -> Array.init (if l = i-1 then j else bs) (fun k -> f (l * bs + k))) 
 
+let of_array x = init (Array.length x) (fun i -> x.(i))
+
 let make_matrix sx sy init =
   let res = make sx (make 0 init) in
   for x = 0 to sx-1 do
