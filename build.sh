@@ -1,1 +1,1 @@
-/home/bga/svn/settings/build.sh
+m4/build.sh
